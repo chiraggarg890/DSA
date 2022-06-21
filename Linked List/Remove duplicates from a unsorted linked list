@@ -1,0 +1,42 @@
+/****************************************************************
+    Following is the class structure of the Node class:
+    class Node
+    {
+    public:
+        int data;
+        Node *next;
+        Node(int data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+*****************************************************************/
+#include<unordered_map>
+#include<algorithm>
+Node *removeDuplicates(Node *head)
+{
+    // Write your code here
+    unordered_map<long , bool>visited;
+    Node* temp=head;
+    visited[temp->data]=true;
+   while(temp->next!=NULL)
+    {
+
+            if(visited[temp->next->data]==true)
+            {
+             Node* remove=temp->next;
+                temp->next=remove->next;
+                remove->next=NULL;
+                delete remove;
+            }
+            else
+            {
+               
+                temp=temp->next;
+               visited[temp->data]=true;
+            }
+      
+    }
+     return head;
+}
