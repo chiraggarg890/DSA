@@ -1,0 +1,40 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+ 
+/** TIME COMPLEXITY - O(n)
+ SPACE COMPLEXITY - O(n)**/
+class Solution {
+    bool checkPalin(vector<int>v,int n)
+    {
+        int s=0;
+        int e=n-1;
+        while(s<=e)
+        {
+        if(v[s]!=v[e])
+        {
+            return false;
+        }
+            s++;e--;}
+        return true;
+    }
+public:
+    bool isPalindrome(ListNode* head) {
+        int n=0;vector<int>v;
+        ListNode* temp=head;
+        while(temp!=NULL)
+        {
+            v.push_back(temp->val);
+            temp=temp->next;
+        }
+        n=v.size();
+       return checkPalin(v,n);
+    }
+};
