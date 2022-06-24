@@ -1,4 +1,8 @@
 /**
+Time Complexity = O(n)
+Space Complexity = O(n)
+**/
+/**
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -36,5 +40,75 @@ public:
         }
         n=v.size();
        return checkPalin(v,n);
+    }
+};
+
+/**
+Time Complexity = O(n)
+Space Complexity = O(1)
+**/
+
+/**
+struct Node {
+  int data;
+  struct Node *next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+};
+*/
+
+class Solution{
+  public:
+  // Function to get Middle of Linked List
+  struct Node* getMiddle(struct Node* head)
+  {
+      struct Node* slow=head;
+      struct Node* fast=head->next;
+      while(fast!=NULL&&fast->next!=NULL)
+      {
+          fast=fast->next->next;
+          slow=slow->next;
+      }
+      return slow;
+  }
+  // Function to reverse the Linked List
+  struct Node* reverse(struct Node* head)
+  {
+      struct Node* curr=head;
+      struct Node* prev=NULL;
+      struct Node* next=NULL;
+      while(curr!=NULL)
+      {
+          next=curr->next;
+          curr->next=prev;
+          prev=curr;
+          curr=next;
+      }
+      return prev;
+  }
+    //Function to check whether the list is palindrome.
+    bool isPalindrome(Node *head)
+    {
+        //Your code here
+        struct Node* middle=getMiddle(head);
+        struct Node* temp=middle->next;
+        middle->next=reverse(temp);
+        struct Node* head1=head;
+        struct Node* head2=middle->next;
+        while(head2!=  NULL)
+        {
+          if(head1->data!=head2->data)
+          {
+              return false;
+          }
+          head1=head1->next;
+          head2=head2->next;
+        }
+        // getting the linked list in original form
+        struct Node* tempp=middle->next;
+         middle->next=reverse(tempp);
+         return true;
     }
 };
