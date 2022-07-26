@@ -1,0 +1,32 @@
+#include<unordered_map>
+#include<vector>
+#include<limits.h>
+class Solution {
+public:
+    int countLargestGroup(int n) {
+        vector<int>store(37);
+        int maxi=INT_MIN;int ans=0;int sum=0;
+        for(int i=1;i<=n;i++)
+        { 
+            sum=0;
+            int copy=i;
+            while(copy!=0)
+            {
+                int ex=copy%10;
+                sum=sum+ex;
+                copy=copy/10;
+            }
+            store[sum]=store[sum]+1;
+            if(maxi==store[sum])
+            {
+                ans++;
+            }
+            else if(maxi<store[sum])
+            {
+                maxi=store[sum];
+                ans=1;
+            }
+        }
+        return ans;
+    }
+};
