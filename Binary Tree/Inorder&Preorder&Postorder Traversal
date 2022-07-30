@@ -1,0 +1,39 @@
+// INORDER
+void inoder(node* root)
+{
+// base case 
+if(root==NULL)
+{
+return;
+}
+ 
+inorder(root->left);
+cout<<root->data<<" ";
+inorder(root->right);
+}
+
+//PREORDER
+void preorder(node* root)
+{
+// base case 
+if(root==NULL)
+{
+return;
+}
+cout<<root->data<<" ";
+preorder(root->left);
+preorder(root->right);
+}
+
+//POSTORDER
+void postorder(node* root)
+{
+if(root==NULL)
+{
+return;
+}
+postorder(root->left);
+postorder(root->right);
+cout<<root->data<<" ";
+}
+
