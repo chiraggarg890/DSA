@@ -1,0 +1,51 @@
+/*
+struct Node
+{
+    int data;
+    Node* left;
+    Node* right;
+};
+*/
+class Solution
+{
+    public:
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    vector<int> topView(Node *root)
+    {
+        //Your code here
+        vector<int>result;
+        if(root==NULL)
+        {
+            return result;
+        }
+        queue<pair<Node*,int>>q;
+        map<int,int>topnode;
+        q.push(make_pair(root,0));
+        while(!q.empty())
+        {
+            pair<Node*,int>p=q.front();
+            q.pop();
+            Node* front=p.first;
+            int hd=p.second;
+            if(topnode.find(hd)==topnode.end())
+            {
+                topnode[hd]=front->data;
+            }
+            if(front->left)
+            {
+                q.push(make_pair(front->left,hd-1));
+            }
+            if(front->right)
+            {
+                q.push(make_pair(front->right,hd+1));
+            }
+        }
+        for(auto i:topnode)
+        {
+            result.push_back(i.second);
+        }
+        return result;
+    }
+
+};
