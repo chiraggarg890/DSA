@@ -1,0 +1,38 @@
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+    
+    Node(int x){
+        data = x;
+        left = right = NULL;
+    }
+}; */
+
+// Should return  right view of tree
+class Solution
+{
+    public:
+    void solve(Node* root,vector<int>&result,int level)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        if(level==result.size())
+        {
+            result.push_back(root->data);
+        }
+        solve(root->right,result,level+1);
+        solve(root->left,result,level+1);
+    }
+    //Function to return list containing elements of right view of binary tree.
+    vector<int> rightView(Node *root)
+    {
+       // Your Code here
+       vector<int>result;
+       solve(root,result,0);
+       return result;
+    }
+};
