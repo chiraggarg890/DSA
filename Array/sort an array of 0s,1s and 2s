@@ -1,0 +1,72 @@
+/* BY MAINTING COUNT OF 0S,1S AND 2S*/
+
+void sort012(int a[], int n)
+{
+    int count0=0;
+    int count1=0;
+    int count2=0;
+    for(int i=0;i<n;i++)
+    {
+        if(a[i]==0)
+        {
+            count0++;
+        }
+        else if(a[i]==1)
+        {
+            count1++;
+        }
+        else
+        {
+            count2++;
+        }
+    }
+    int j=0;//int y=0;
+//printf("%d",count0);
+int k=0;
+        for( k=0;k<count0;k++)
+      {
+          a[k]=0;
+       
+      //    y++;
+      }
+       j=k;
+    //  printf("%d",y);
+         for( k=j;k<(count0+count1);k++)
+       { a[k]=1;
+        }
+        j=k;
+         for( k=j;k<(count0+count1+count2);k++)
+       { a[k]=2;}
+    
+    
+/*   3 POINTERS APPROACH   */
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int lo = 0; 
+        int hi = nums.size() - 1; 
+        int mid = 0; 
+
+        while (mid <= hi) { 
+            switch (nums[mid]) { 
+
+            // If the element is 0 
+            case 0: 
+                swap(nums[lo++], nums[mid++]); 
+                break; 
+
+            // If the element is 1 . 
+            case 1: 
+                mid++; 
+                break; 
+
+            // If the element is 2 
+            case 2: 
+                swap(nums[mid], nums[hi--]); 
+                break; 
+            }
+        }
+         
+    }
+};
