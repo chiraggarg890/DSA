@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int max(int a,int b)
+    {
+   int ans=a>b?a:b;
+        return ans;
+    }
+    void solve(string s,int &maxi)
+    {
+        unordered_map<char,int>store;int i=0,j=0;
+        while(j<s.size())
+        {
+            store[s[j]]++;
+            if(store.size()==(j-i+1))
+            {
+                maxi=max(maxi,store.size());
+                j++;
+            }
+            else
+            {
+                while(store.size()<(j-i+1))
+                {  store[s[i]]--;
+                 if(store[s[i]]==0)
+                 {
+                     store.erase(s[i]);
+                 }
+                i++;
+                }
+                j++;
+            }
+        }
+    }
+    int lengthOfLongestSubstring(string s) {
+        int ans=INT_MIN;
+        solve(s,ans);
+        if(ans>0)
+        return ans;
+        else 
+            return 0;
+        
+    }
+};
