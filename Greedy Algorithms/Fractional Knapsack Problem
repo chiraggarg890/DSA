@@ -1,0 +1,43 @@
+struct Item{
+    int value;
+    int weight;
+};
+*/
+
+
+class Solution
+{
+    public:
+    static bool cmp(pair<double,Item>a,pair<double,Item>b)
+    {
+        return a.first>b.first;
+    }
+    //Function to get the maximum total value in the knapsack.
+    double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        // Your code here
+        vector<pair<double,Item>>store;
+        for(int i=0;i<n;i++)
+        {
+            double temp=(1.0*arr[i].value)/(arr[i].weight);
+            pair<double,Item>p=make_pair(temp,arr[i]);
+            store.push_back(p);
+        }
+        sort(store.begin(),store.end(),cmp);
+        double ans=0.0;
+        for(int i=0;i<n;i++)
+        {
+            if(W>store[i].second.weight)
+            {
+                ans+=store[i].second.value;
+                W-=store[i].second.weight;
+            }
+            else
+            {
+                ans+=((W*1.0*store[i].second.value)/store[i].second.weight);
+                W=0;
+            }
+        }
+        return ans;
+    }
+    };
