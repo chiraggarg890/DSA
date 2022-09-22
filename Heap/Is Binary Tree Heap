@@ -1,0 +1,72 @@
+class Solution {
+  public:
+  int totalCount(struct Node* tree)
+  {
+      if(tree==NULL)
+      {
+          return 0;
+      }
+     
+      int ans=1+totalCount(tree->left)+totalCount(tree->right);
+      return ans;
+       
+  }
+  bool isCBT(struct Node* tree,int i, int cnt)
+  {
+      if(tree==NULL)
+      {
+          return true;
+      }
+      if(i>=cnt)
+      {
+          return false;
+      }
+      bool left=isCBT(tree->left,2*i+1,cnt);
+      bool right=isCBT(tree->right,2*i+2,cnt);
+      return (left&&right);
+  }
+  bool isMaxHeap(struct Node* tree)
+  {
+       if(tree->left==NULL&& tree->right==NULL)
+      {
+          return true;
+      }
+      if(tree->right==NULL)
+      {
+          return tree->data>tree->left->data;
+      }
+     
+      int rootValue=tree->data;
+      int leftValue=tree->left->data;
+      int rightValue=tree->right->data;
+      //if(tree->left)
+      bool left=isMaxHeap(tree->left);
+      //if(tree->right)
+      bool right=isMaxHeap(tree->right);
+      if(rootValue>leftValue&&rootValue>rightValue&&left&&right)
+      {
+       return true;   
+      }
+      else
+      {
+          return false;
+      }
+  }
+    bool isHeap(struct Node* tree) {
+        // code here
+      //  cout<<"0"<<endl;
+       int cnt=totalCount(tree);
+      // cout<<cnt<<"        ";
+        int i=0;
+        
+        if(isCBT(tree,i,cnt)&&isMaxHeap(tree))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    };
