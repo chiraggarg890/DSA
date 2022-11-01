@@ -1,0 +1,78 @@
+class Solution{
+	public:
+  
+  RECURSION
+/*	int solve(int n)
+	{
+	    if(n==0)
+	    {
+	        return 0;
+	    }
+	 /*  if(n<0)
+	    {
+	        return n;
+	    }*/
+	 /*
+	 int mini=n;
+	    for(int i=1;i*i<=n;i++)
+	    {
+	        int temp=i*i;
+	        mini=min(mini,1+solve(n-temp));
+	    }
+	    return mini;
+	}*/
+  
+  RECURSION + MEMOIZATION
+/*	int solveRec(int n,vector<int> &dp)
+	{
+	    if(n==0)
+	    {
+	        return 0;
+	    }
+	 /*  if(n<0)
+	    {
+	        return n;
+	    }*/
+/*	 if(dp[n]!=-1)
+	 {
+	     return dp[n];
+	 }
+	 int mini=n;
+	    for(int i=1;i*i<=n;i++)
+	    {
+	        int temp=i*i;
+	        mini=min(mini,1+solveRec(n-temp,dp));
+	        dp[n]=mini;
+	    }
+	    return dp[n];
+	}*/
+  
+  TABULATION
+	int solveTab(int n)
+	{
+	    vector<int>dp(n+1,INT_MAX);
+	   dp[0]=0;
+	 for(int j=1;j<=n;j++)
+	 {
+	// int mini=n;
+	    for(int i=1;i*i<=n;i++)
+	    {
+	        int temp=i*i;
+	        if(j-temp>=0)
+	         dp[j]=min(dp[j],1+dp[j-temp]);
+	       
+	    }
+	}
+	  return dp[n];
+	}
+	int MinSquares(int n)
+	{
+	    // Code here
+	 //  int sq=(int)(sqrt(n));
+	  /* cout<<sq<<endl;
+	   return 0;*/
+	  // vector<int>dp(n+1,-1);
+	return solveTab(n);
+	   
+	}
+  };
