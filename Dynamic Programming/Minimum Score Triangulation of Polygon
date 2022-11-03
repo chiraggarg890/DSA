@@ -43,6 +43,7 @@ int ans=INT_MAX;
     return dp[0][n-1];
 }
 
+SPACE OPTIMIZATION NOT POSSIBLE
 
     int minScoreTriangulation(vector<int>& values) {
           
