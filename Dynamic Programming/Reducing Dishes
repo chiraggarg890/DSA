@@ -1,0 +1,81 @@
+class Solution {
+public:
+
+RECURSION + MEMOIZATION
+
+  /*  int solve(vector<int>& satisfaction,int i,int n,int f,vector<vector<int>> &dp)
+    {
+         if(i==n)
+         {
+             return 0;
+         }
+        if(dp[i][f]!=-1)
+        {
+            return dp[i][f];
+        }
+        int ans=INT_MIN;
+        int pick=f*satisfaction[i]+solve(satisfaction,i+1,n,f+1,dp);
+        int notpick=0+solve(satisfaction,i+1,n,f,dp);
+        
+        ans=max(pick,notpick);
+        return dp[i][f]=ans; 
+    }*/
+    
+    
+    
+    TABULATION
+  /*  int solveTab(vector<int>& satisfaction)
+    {
+        int n=satisfaction.size();
+         vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+        for(int i=n-1;i>=0;i--)
+        {
+            for(int f=i;f>=0;f--)
+            {
+               int ans=INT_MIN;
+        int pick=(f+1)*satisfaction[i]+dp[i+1][f+1];
+        int notpick=0+dp[i+1][f];
+        
+        ans=max(pick,notpick);
+         dp[i][f]=ans;   
+            }
+        }
+       return dp[0][0];
+    }*/
+    
+    
+    
+    SPACE OPTIMIZATION
+    int solveSO(vector<int>& satisfaction)
+    {
+        int n=satisfaction.size();
+         //vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+        vector<int>curr(n+1,0);
+        vector<int>next(n+1,0);
+        for(int i=n-1;i>=0;i--)
+        {
+            for(int f=i;f>=0;f--)
+            {
+               int ans=INT_MIN;
+        int pick=(f+1)*satisfaction[i]+next[f+1];
+        int notpick=0+next[f];
+        
+        ans=max(pick,notpick);
+         curr[f]=ans;   
+            }
+            next=curr;
+        }
+       return next[0];
+    }
+    
+    int maxSatisfaction(vector<int>& satisfaction) {
+        
+       // int n=satisfaction.size();
+       // vector<vector<int>>dp(n,vector<int>(n+1,-1));
+       // int f=1;
+        sort(satisfaction.begin(),satisfaction.end());
+        //return solve(satisfaction,0,n,f,dp);
+       // return solveTab(satisfaction);
+        return solveSO(satisfaction);
+    }
+};
