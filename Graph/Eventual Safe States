@@ -1,0 +1,49 @@
+class Solution {
+  public:
+  bool dfs(int source,vector<int> adj[],unordered_map<int,bool> &visited,unordered_map<int,bool> &dfsvisited,int check[])
+  {
+      visited[source]=1;
+      dfsvisited[source]=1;
+      check[source]=0;
+      for(auto it:adj[source])
+      {
+          if(!visited[it])
+          {
+              bool cycle=dfs(it,adj,visited,dfsvisited,check);
+              if(cycle==true)
+              {
+                  return true;
+              }
+          }
+          else if(dfsvisited[it])
+          {
+              return true;
+          }
+      }
+      dfsvisited[source]=false;
+      check[source]=1;
+      return false;
+  }
+    vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
+        // code here
+        unordered_map<int,bool>visited;
+        unordered_map<int,bool>dfsvisited;
+        vector<int>ans;
+        int check[V]={0};
+        for(int i=0;i<V;i++)
+        {
+            if(!visited[i])
+            {
+                dfs(i,adj,visited,dfsvisited,check);
+            }
+        }
+        for(int i=0;i<V;i++)
+        {
+            if(check[i]==1)
+            {
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+    }:
